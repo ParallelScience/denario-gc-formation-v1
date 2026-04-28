@@ -1,0 +1,90 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Initialize Planck 2018 cosmology (H0=67.4, Omega_m=0.315, Omega_Lambda=0.685) using astropy",
+                "Hard-code all GEMS (z_obs=9.625) and Sparkler (z_obs=1.4) GC data exactly as provided in the problem statement",
+                "For each GC, compute the cosmic age at the observation redshift using astropy, subtract the observed GC age to get the cosmic age at formation, then invert to get z_form using astropy's z_at_value",
+                "Clamp the formation cosmic age to a minimum of 10 Myr to avoid unphysical redshifts above z~30; document this edge-case handling in the code docstrings",
+                "Propagate age uncertainties (lower and upper) to produce z_form_lower and z_form_upper for each GC",
+                "Compute and print the lookback time at each GC's formation redshift using astropy's lookback_time function",
+                "Print a detailed, well-labeled table of all GCs with their z_form, z_form_lower, z_form_upper, lookback time at formation, mass, metallicity, and age",
+                "Save all computed values to a CSV file including columns: name, system, log10_mass, age_Gyr, ZH, z_form, z_form_lower, z_form_upper, lookback_time_form_Gyr"
+            ],
+            "sub_task": "Cosmological framework setup and formation redshift computation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement the Sheth-Tormen halo mass function using Planck 2018 parameters (sigma8=0.811, ns=0.965, Omega_m=0.315, Omega_b=0.049, H0=67.4)",
+                "Compute the minimum halo mass M_min(z) corresponding to the atomic cooling threshold (T_vir >= 10^4 K) as a function of redshift from z=20 down to z=1",
+                "Explicitly print M_min(z) values at representative redshifts z=5, 10, 15, 20 to verify the atomic cooling threshold computation",
+                "At each redshift, integrate the Sheth-Tormen mass function above M_min(z) to get the cumulative number density of atomic cooling halos",
+                "Compute the differential GC formation rate by taking the derivative of the cumulative number density with respect to both redshift and lookback time",
+                "Normalize the distribution to represent the GC formation rate per unit redshift",
+                "Save the theoretical model to disk: redshift array, lookback time array, cumulative density, differential rate per unit redshift, and differential rate per unit lookback time"
+            ],
+            "sub_task": "Reconstruct Trenti et al. (2015) atomic cooling halo formation history using Sheth-Tormen mass function",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load z_form data from Step 1 and theoretical model from Step 2",
+                "Print the time interval in Gyr between z=9.625 and z=1.4 computed from Planck 2018 cosmology",
+                "Implement a mass-dependent cluster disruption model where survival probability scales as P_survive proportional to M^alpha",
+                "Explore at minimum three values of alpha: 0.5, 1.0, and 2.0",
+                "For each alpha, apply the disruption model to the GEMS stellar mass distribution to simulate the surviving population",
+                "Perform KS test and Anderson-Darling test comparing each simulated surviving distribution to the observed Sparkler mass distribution",
+                "Compute the likelihood that Sparkler clusters were drawn from each evolved GEMS-like distribution",
+                "Report which alpha value produces the best statistical match to the Sparkler mass distribution",
+                "Print all test statistics, p-values, and likelihood estimates for all alpha values",
+                "Save the survival modeling results including best-fit alpha and simulated surviving mass distributions to disk"
+            ],
+            "sub_task": "Survival bias modeling — evolve GEMS population to Sparkler epoch",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load z_form values from Step 1 and theoretical model from Step 2",
+                "Construct empirical CDFs for z_form of GEMS and Sparkler populations",
+                "Perform two-sample Anderson-Darling test comparing GEMS vs Sparkler z_form distributions",
+                "Perform one-sample test comparing the combined empirical z_form distribution against the theoretical cumulative halo formation history from Step 2",
+                "Implement partial Spearman rank correlation using the residual method: regress [Z/H] on log10(M) and z_form on log10(M) separately using linear regression, then compute Spearman correlation between the two sets of residuals; do this for GEMS, Sparkler, and combined",
+                "Compute linear regression slope and intercept with uncertainties for the [Z/H] vs z_form relation for GEMS separately, Sparkler separately, and combined sample",
+                "Compute mean, median, and standard deviation for stellar mass, metallicity, and z_form for each system",
+                "Print all statistics in a detailed, well-labeled format",
+                "Save all statistical results (summary stats, regression coefficients, correlation coefficients, test statistics) to a CSV or numpy file"
+            ],
+            "sub_task": "Statistical analysis — CDFs, Anderson-Darling tests, partial Spearman correlation, and summary statistics",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all computed results from Steps 1–4",
+                "Figure 1 (multi-panel): Plot the theoretical GC formation rate vs redshift (Trenti et al. analog from Step 2) with the atomic cooling threshold mass range (10^7–10^8 solar masses) labeled in the legend or as an annotation; overplot GEMS z_form values with horizontal error bars (from z_form_lower and z_form_upper) as a rug/scatter at a fixed y-position, and Sparkler z_form values similarly; include a secondary x-axis showing lookback time in Gyr",
+                "Figure 2: Mass-metallicity scatter plot for GEMS and Sparkler combined — log10(M/Msolar) on x-axis, [Z/H] on y-axis, with error bars, color-coded by system; include a linear regression line for each system",
+                "Figure 3 (multi-panel): (a) Empirical CDFs of z_form for GEMS, Sparkler, and theoretical model; (b) Age distributions as histograms for both systems; (c) [Z/H] vs z_form scatter with regression lines for both systems and the combined sample",
+                "Figure 4: Survival bias modeling — show GEMS mass distribution, simulated surviving distributions for each alpha value, and observed Sparkler mass distribution, all on the same axes for direct comparison",
+                "Save all figures at dpi>=300 with descriptive timestamped filenames"
+            ],
+            "sub_task": "Generate all figures",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize all quantitative results from Steps 1–5 including z_form values, lookback times, statistical test outcomes, correlation coefficients, regression slopes, survival modeling results, and summary statistics",
+                "Report the formation redshift distributions for GEMS and Sparkler, explicitly quantifying what fraction of GEMS clusters have z_form within the model's predicted peak redshift range from the Trenti et al. atomic cooling model",
+                "Discuss the mass-metallicity relation findings for both systems and what they imply about early chemical enrichment",
+                "Interpret the Anderson-Darling test results for both the two-sample GEMS vs Sparkler comparison and the one-sample comparison against the theoretical model",
+                "Discuss the partial Spearman correlation results between metallicity and z_form (controlling for mass) and what the regression slopes imply about a continuous vs. discontinuous chemical enrichment track",
+                "Interpret the survival bias modeling results across all alpha values — does the Sparkler population represent the surviving high-mass tail of a GEMS-like progenitor, and which alpha best reproduces the Sparkler mass distribution",
+                "Separately address the tension or consistency implied by the Sparkler's wide age uncertainties (some exceeding 5 Gyr) and how this affects the reliability of Sparkler z_form estimates compared to GEMS",
+                "Address all four key questions: GEMS consistency with atomic cooling model, Sparkler ancient GC interpretation, metallicity enrichment history, and unified LCDM scenario",
+                "Reference all figures generated in Step 5 by their content and panel descriptions",
+                "Provide a unified narrative connecting both systems within the LCDM framework"
+            ],
+            "sub_task": "Write the full Results section of the paper",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
