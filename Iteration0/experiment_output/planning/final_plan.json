@@ -1,0 +1,75 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Initialize Planck 2018 cosmology (H0=67.4, Omega_m=0.315, Omega_Lambda=0.685, Omega_b=0.049, sigma8=0.811, ns=0.965) using astropy",
+                "Establish lookback time vs. redshift relationship over z=0 to z=30",
+                "Implement the Sheth-Tormen mass function with standard parameterization (a=0.707, p=0.3, A=0.3222)",
+                "Compute the redshift-dependent minimum halo mass threshold M_min(z) for T_vir >= 10^4 K using the virial temperature formula with mean molecular weight mu=0.6 (ionized gas) and the Bryan & Norman (1998) overdensity formula",
+                "Compute the cumulative number density of halos above M_min(z) as a function of redshift using the Sheth-Tormen mass function, then derive the formation rate as the derivative with respect to redshift or time",
+                "Normalize the theoretical curve to its peak value",
+                "Print to console: the peak redshift of the theoretical formation rate curve, M_min values at z=5, 10, 15, 20, and the total integrated number density of atomic cooling halos",
+                "Save all computed theoretical arrays (redshift grid, formation rate, M_min, normalized rate) to disk as numpy arrays for use in later steps"
+            ],
+            "sub_task": "Cosmological Framework Setup and Theoretical Model Reconstruction",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Hard-code the GEMS (z_obs=9.625) and Sparkler (z_obs=1.4) GC datasets exactly as provided in the problem statement",
+                "For each GC, compute the lookback time at z_obs using Planck 2018 cosmology, subtract the observed age (in Gyr) to obtain the lookback time at formation, then invert to obtain z_form; all age arithmetic must be performed in lookback time space",
+                "Flag and print a warning for any GC whose observed age exceeds the age of the universe at z_obs; cap such cases at a high-redshift sentinel value",
+                "Perform Monte Carlo sampling (1000 iterations per GC) using a split-normal distribution: the lower error bar governs perturbations on the negative side and the upper error bar governs perturbations on the positive side; reject and resample any draw that produces a negative age or an age exceeding the age of the universe at z_obs",
+                "Compute mean, median, and standard deviation of z_form for each individual GC from the MC samples",
+                "Compute system-level summary statistics (mean, median, std) for stellar mass, metallicity [Z/H], and z_form for GEMS and Sparkler separately",
+                "Print all per-GC and system-level statistics to console in full detail",
+                "Save all results (point estimates, per-GC MC z_form arrays, summary statistics) to disk"
+            ],
+            "sub_task": "Formation Redshift Mapping with Monte Carlo Uncertainty Propagation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the theoretical formation rate curve and the GC z_form results from previous steps",
+                "Construct the theoretical CDF by integrating and normalizing the formation rate curve over the redshift range spanned by the observed median z_form values; perform KS tests using the median z_form values (not full MC samples) for GEMS and Sparkler separately against this theoretical CDF",
+                "Identify the theoretical \"peak formation window\" as the redshift range where the normalized rate exceeds 50% of its peak; compute and print the fraction of clusters in each system falling within this window",
+                "Perform Spearman rank correlation between [Z/H] and z_form for the combined dataset and separately for each system; print rho and p-value for each",
+                "Perform Spearman rank correlation between [Z/H] and log10_mass for the combined dataset",
+                "Perform Spearman partial correlation between [Z/H] and z_form controlling for log10_mass using the rank-based residuals approach; print the partial correlation coefficient, its p-value, and an explicit statement of which variable is being controlled for",
+                "Print all statistical results (KS statistic, p-value, Spearman rho, p-values, fractions, partial correlation) to console in full detail",
+                "Save all statistical results to disk"
+            ],
+            "sub_task": "Statistical Analysis — KS Tests, Spearman Correlations, and Model Comparison",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all precomputed results from previous steps",
+                "Figure 1: Plot the normalized theoretical GC formation rate vs. redshift. Add a shaded band for the peak formation window (rate > 50% of maximum). Overplot GEMS z_form values as a rug plot or jittered points along the x-axis with MC-derived uncertainty ranges. Overplot Sparkler z_form values similarly with a distinct color/marker. Add a secondary x-axis showing lookback time in Gyr. Save as a separate PNG file.",
+                "Figure 2: Plot [Z/H] vs. log10(M/Msolar) for GEMS and Sparkler GCs with distinct markers and colors, including metallicity error bars. Add at least 10 canonical Milky Way GC reference points from Harris (1996, 2010 edition) spanning the full metallicity range. Compute and overplot an OLS best-fit line for the combined GEMS+Sparkler dataset; print and annotate the slope and intercept on the plot. Save as a separate PNG file.",
+                "Figure 3: Two-panel figure: top panel shows z_form distributions for GEMS and Sparkler as KDEs or histograms overlaid on the normalized theoretical formation rate curve; bottom panel shows the observed age distributions for both systems. Save as a separate PNG file.",
+                "Figure 4: Scatter plot of [Z/H] vs. z_form for all GCs, color-coded by system (GEMS vs. Sparkler), with metallicity error bars. Annotate with the Spearman correlation coefficient and p-value for the combined dataset. Save as a separate PNG file.",
+                "All figures saved at dpi>=300 as separate PNG files"
+            ],
+            "sub_task": "Generate All Figures (Four Separate PNG Files)",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize all quantitative results from the previous steps into a comprehensive Results section of a scientific paper",
+                "Report the reconstructed theoretical formation rate curve: describe the Sheth-Tormen implementation, the Bryan & Norman overdensity, the peak redshift of the formation rate, and M_min values at z=5, 10, 15, 20",
+                "Report the formation redshift z_form for each individual GC in both systems (median values with MC-derived uncertainties), and system-level summary statistics for mass, metallicity, and z_form",
+                "Describe and interpret Figure 1: assess whether GEMS and Sparkler GC formation redshifts are consistent with the atomic cooling model's predicted peak formation window; note which clusters fall inside vs. outside the window",
+                "Describe and interpret Figure 2: discuss the mass-metallicity relation for both systems combined and relative to Milky Way GCs; report the OLS best-fit slope and intercept; discuss implications for early chemical enrichment",
+                "Describe and interpret Figure 3: discuss the age and z_form distributions and their alignment with the theoretical model peak",
+                "Describe and interpret Figure 4: discuss the [Z/H] vs. z_form Spearman correlation (report exact rho and p-value) and its implications for hierarchical chemical enrichment",
+                "Report all KS test results with exact KS statistic and p-value for each system; report all Spearman correlations with rho and p-values; report the partial correlation coefficient and p-value with explicit statement of the controlled variable",
+                "Address all key questions: consistency of GEMS with atomic cooling model, whether Sparkler GCs are ancient relics from the same epoch, what metallicities imply about enrichment history, and whether a unified LCDM scenario can explain both systems",
+                "Discuss potential systematic biases: dust attenuation in Sparkler, different detection limits, age uncertainties and their asymmetric nature",
+                "Provide a concluding synthesis statement on the unified LCDM formation scenario regulated by the atomic cooling threshold"
+            ],
+            "sub_task": "Write the Full Results Section",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
