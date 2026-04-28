@@ -1,0 +1,77 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Initialize Planck 2018 cosmology (H0=67.4, Omega_m=0.315, Omega_Lambda=0.685, Omega_b=0.049, sigma8=0.811, ns=0.965) using astropy",
+                "Define a function to convert observed redshift + age offset into formation redshift (z_form) for each GC; apply to all 19 GEMS GCs (z_obs=9.625) and all 5 Sparkler GCs (z_obs=1.4) using their median ages; propagate age_err_lo and age_err_hi separately to produce asymmetric z_form uncertainties",
+                "Implement the standard virial temperature-to-halo-mass conversion formula (relating T_vir to M_halo, redshift, mean molecular weight, gravitational constant, and virial overdensity); compute and print the atomic cooling halo mass threshold M_min(z) at z=5, 8, 10, 15, 20 to verify physical reasonableness",
+                "Reconstruct the Trenti et al. (2015) Fig. 3 top panel by computing the differential number density of atomic cooling halos (T_vir >= 10^4 K) as a function of redshift using the Sheth-Tormen or Press-Schechter mass function with Planck 2018 parameters over a redshift grid from z=0 to z=20; normalize the curve so it can be meaningfully compared to the discrete observed GC z_form distributions",
+                "Save the full per-GC z_form table (with lower and upper uncertainties) as a structured CSV file; also save the theoretical halo formation rate curve as a CSV",
+                "Print a detailed statistical summary of z_form values for both systems"
+            ],
+            "sub_task": "Cosmological Framework, Temporal Mapping, and Atomic Cooling Model Reconstruction",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the z_form CSV from Step 1",
+                "Compute statistical summaries (mean, median, standard deviation) of age, log10(mass), and metallicity [Z/H] for GEMS and Sparkler separately; print all values in detail",
+                "Perform Theil-Sen robust linear regression for the mass-metallicity relation ([Z/H] vs log10(M/Msolar)) for GEMS and Sparkler separately and combined; print slopes, intercepts, and uncertainties",
+                "Compute the power-law slope (alpha) of the GC mass function (dN/dM ~ M^-alpha) for both populations by fitting in log-log space on the complementary cumulative distribution; print slopes with uncertainties",
+                "Perform a Kolmogorov-Smirnov test comparing the mass distributions of GEMS and Sparkler; explicitly print the caveat that N=19 for GEMS and N=5 for Sparkler, and that the K-S test has very low statistical power with N=5",
+                "Compute Spearman rank correlation between metallicity [Z/H] and z_form for each system and combined; print rho and p-values",
+                "Save all computed statistics and regression results to a CSV or structured text file for use in Step 6"
+            ],
+            "sub_task": "Mass-Metallicity Relation, Age Distribution, and Statistical Summary Computation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all computed data from Steps 1 and 2",
+                "Generate a single multi-panel figure (3x2 grid, 6 panels labeled a–e with one empty or used for legend/summary) containing all five plots: Panel (a): Reconstructed Trenti et al. (2015) atomic cooling halo differential number density vs. redshift, overlaid with vertical markers showing z_form for GEMS (blue) and Sparkler (orange) GCs with asymmetric error bars; mark the atomic cooling threshold mass range; Panel (b): Histogram of z_form values for GEMS and Sparkler overlaid on the normalized theoretical atomic cooling formation rate curve (same curve as panel a, for visual consistency); Panel (c): Scatter plot of [Z/H] vs log10(M/Msolar) for GEMS (blue circles) and Sparkler (orange squares) with error bars and Theil-Sen regression lines; annotate slope values; Panel (d): Scatter plot of [Z/H] vs z_form for both systems with error bars; annotate Spearman rho and p-value; color-code by system; Panel (e): Log-log plot of the GC complementary cumulative mass function for GEMS and Sparkler with power-law fits overlaid; Panel (f): Histogram of GC ages for GEMS and Sparkler (two separate histograms or overlapping with transparency)",
+                "Save the consolidated figure to disk with timestamp; print file path"
+            ],
+            "sub_task": "Generate consolidated multi-panel analysis figure",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Provide background on the Trenti et al. (2015) atomic cooling model: the physical basis of the T_vir >= 10^4 K threshold, the role of atomic hydrogen cooling in enabling star formation in early halos",
+                "Quantify the expected GC formation redshift range from the atomic cooling model (z_form ~ 3–15) and explicitly discuss the prediction that the GC formation rate peaks at z ~ 3–6 in the Trenti et al. (2015) LCDM model",
+                "Discuss the expected mass range of atomic cooling halos (M_halo ~ 10^7–10^8 Msolar) and how this connects to observed GC stellar masses (~10^6–10^8 Msolar)",
+                "Explain the significance of GEMS at z=9.625 as a probe of cosmic dawn GC formation and the Sparkler at z=1.4 as a probe of ancient GCs formed at high redshift and observed later",
+                "Discuss the expected metallicity evolution in LCDM and what sub-solar metallicities imply about the enrichment history"
+            ],
+            "sub_task": "Background and theoretical context for the atomic cooling model and LCDM GC formation",
+            "sub_task_agent": "researcher"
+        },
+        {
+            "bullet_points": [
+                "Load Sparkler GC stellar masses and z_form values from previous steps",
+                "Apply a stellar-to-halo mass ratio (epsilon ~ 0.01–0.05, appropriate for high-redshift low-mass halos) to convert observed Sparkler stellar masses to implied halo masses; print the assumed epsilon range, the resulting implied halo mass range, and justify the choice by referencing the expected star formation efficiency in low-mass halos at high redshift",
+                "Compare the implied halo masses to the molecular cooling threshold (M_halo ~ 10^5–10^6 Msolar) and the atomic cooling threshold (M_halo ~ 10^7–10^8 Msolar) at z ~ 2–4; print whether Sparkler GCs are consistent with atomic or molecular cooling halos",
+                "Implement the Maiolino et al. (2008) analytic MZR parameterization; evaluate it at the median stellar mass of GEMS and Sparkler GC systems at their respective median z_form values; compare predicted [Z/H] to observed median [Z/H] from Step 2; print the observed vs. predicted metallicity offset and quantify the 0.4 dex offset between systems",
+                "Save all results to disk"
+            ],
+            "sub_task": "Molecular Cooling Threshold Analysis and Cosmic Metallicity Evolution Comparison",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize all quantitative results from Steps 1–5 into a comprehensive Results section",
+                "Report z_form values for all GEMS and Sparkler GCs with asymmetric uncertainties; compare to the Trenti et al. (2015) atomic cooling model prediction and explicitly address the tension between GEMS z_form values (only slightly above z=9.625 given ages of 0.003–0.307 Gyr) and the model's predicted peak at z ~ 3–6; interpret whether GEMS GCs represent the high-redshift tail of the distribution or a challenge to the model",
+                "Report statistical summaries (mean, median, scatter) for age, mass, and metallicity for each system",
+                "Describe and interpret the mass-metallicity relation for both systems including Theil-Sen regression slopes and the ~0.4 dex metallicity offset; compare to the Maiolino et al. (2008) MZR predictions from Step 5",
+                "Report the Spearman correlation between [Z/H] and z_form and interpret its physical meaning",
+                "Report the K-S test result for the mass distributions with the explicit caveat about low statistical power (N=5 for Sparkler); interpret whether GEMS and Sparkler represent distinct populations",
+                "Report the mass function slopes and compare between systems",
+                "Report the molecular cooling vs. atomic cooling threshold comparison for Sparkler from Step 5",
+                "Provide a unified interpretation: can both systems be explained by a single LCDM GC formation scenario regulated by the atomic cooling threshold?",
+                "Reference all panels of the consolidated figure from Step 3 by panel letter",
+                "Include all key numerical values from the analysis"
+            ],
+            "sub_task": "Write the full Results section of the paper",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
