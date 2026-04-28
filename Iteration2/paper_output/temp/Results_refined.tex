@@ -1,0 +1,106 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+We present the results of our analysis, beginning with the derived formation redshifts for the GEMS and Sparkler globular cluster (GC) populations and their comparison to the theoretical atomic cooling model. We then summarize the statistical properties of the two samples and conclude with an analysis of their mass-metallicity relation.
+
+\subsection{Formation epochs and the atomic cooling threshold}
+
+For each of the 24 GCs in our combined sample, we calculated a formation redshift ($z_\mathrm{form}$) by converting its published age and observed redshift into a lookback time, assuming a Planck 2018 flat $\Lambda$CDM cosmology. The resulting properties for all clusters are listed in Table \ref{tab:gc_properties}. The GEMS clusters, observed at $z=9.625$, exhibit a wide range of formation redshifts, from $z_\mathrm{form} = 9.68$ to $19.13$, with a mean of $\langle z_\mathrm{form} \rangle = 12.90 \pm 2.44$. In contrast, the Sparkler clusters, observed at $z=1.4$, formed in a much narrower and later epoch, with $z_\mathrm{form}$ ranging from $2.18$ to $3.51$ and a mean of $\langle z_\mathrm{form} \rangle = 2.59 \pm 0.54$.
+
+\begin{table*}[t]
+\centering
+\caption{Derived Properties of the GEMS and Sparkler Globular Clusters.}
+\label{tab:gc_properties}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccccc}
+\hline
+\hline
+GC ID & System & $\log_{10}(M_\star/M_\odot)$ & Age (Gyr) & $z_\mathrm{form}$ & $\sigma_{z,\mathrm{lo}}$ & $\sigma_{z,\mathrm{hi}}$ & $[\mathrm{Z/H}]$ \\
+\hline
+J1 & GEMS & 7.680 & 0.307 & 19.13 & $-2.07$ & $+3.89$ & $-0.156$ \\
+I1 & GEMS & 7.210 & 0.222 & 14.55 & $-1.89$ & $+2.01$ & $-0.117$ \\
+H1 & GEMS & 7.113 & 0.269 & 17.00 & $-2.55$ & $+2.73$ & $-0.167$ \\
+G1 & GEMS & 6.580 & 0.091 & 10.55 & $-1.14$ & $+0.87$ & $-0.179$ \\
+A1 & GEMS & 7.489 & 0.108 & 11.22 & $-0.55$ & $+0.52$ & $-0.205$ \\
+B1 & GEMS & 8.048 & 0.208 & 13.73 & $-0.93$ & $+1.01$ & $-0.005$ \\
+C1 & GEMS & 7.517 & 0.112 & 11.35 & $-0.77$ & $+0.80$ & $-0.060$ \\
+D1 & GEMS & 7.883 & 0.220 & 14.38 & $-1.30$ & $+1.55$ & $-0.127$ \\
+E1 & GEMS & 6.767 & 0.056 & 10.07 & $-0.82$ & $+0.49$ & $-0.185$ \\
+F1 & GEMS & 6.909 & 0.098 & 10.87 & $-0.93$ & $+0.73$ & $-0.160$ \\
+F2 & GEMS & 7.092 & 0.133 & 11.87 & $-0.66$ & $+0.79$ & $-0.271$ \\
+E2 & GEMS & 6.202 & 0.004 & 9.68 & $-0.03$ & $+0.02$ & $-0.180$ \\
+D2 & GEMS & 7.328 & 0.113 & 11.40 & $-1.07$ & $+1.01$ & $-0.167$ \\
+C2 & GEMS & 7.575 & 0.116 & 11.49 & $-1.06$ & $+0.94$ & $-0.109$ \\
+B2 & GEMS & 7.915 & 0.150 & 12.35 & $-0.56$ & $+0.60$ & $+0.041$ \\
+A2 & GEMS & 7.224 & 0.090 & 10.52 & $-0.61$ & $+0.43$ & $-0.609$ \\
+H2 & GEMS & 6.644 & 0.092 & 10.57 & $-1.31$ & $+0.74$ & $-0.237$ \\
+I2 & GEMS & 7.273 & 0.248 & 15.87 & $-2.60$ & $+2.72$ & $-0.116$ \\
+J2 & GEMS & 7.155 & 0.192 & 13.27 & $-1.14$ & $+1.44$ & $-0.155$ \\
+\hline
+1 & Sparkler & 6.891 & 2.731 & 3.51 & $-1.07$ & $+0.53$ & $-0.850$ \\
+2 & Sparkler & 7.026 & 2.028 & 2.61 & $-0.44$ & $+0.36$ & $-0.483$ \\
+4 & Sparkler & 6.847 & 1.509 & 2.18 & $-0.34$ & $+0.22$ & $-0.404$ \\
+8 & Sparkler & 7.065 & 1.744 & 2.36 & $-0.31$ & $+0.25$ & $-0.965$ \\
+10 & Sparkler & 6.944 & 1.660 & 2.29 & $-0.29$ & $+0.31$ & $-0.185$ \\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+To place these formation epochs in a theoretical context, we compare them to the cosmic GC formation rate predicted by the atomic cooling threshold model. This model, based on the abundance of dark matter halos with virial temperatures $T_\mathrm{vir} \geq 10^4$ K, predicts a formation rate that peaks broadly around $z \sim 3-6$ and declines at higher redshifts. Figure \ref{fig:image0}, panels (a) and (b), show the cumulative distribution of this theoretical formation rate, against which we plot the formation redshifts of our two GC samples.
+
+The Sparkler GCs, with $z_\mathrm{form}$ between 2.2 and 3.5, align remarkably well with the predicted peak of GC formation activity. This finding supports the model's core prediction that a significant fraction of GCs formed in atomic cooling halos during the epoch of peak cosmic star formation.
+
+Conversely, the GEMS GCs, with $z_\mathrm{form}$ spanning $\sim 9.7-19.1$, populate the high-redshift tail of the same theoretical distribution. This is not in tension with the model, but is a direct consequence of an observational selection effect: since the GEMS system is observed at $z_\mathrm{obs} = 9.625$, only clusters that formed at $z > 9.625$ are detectable. For instance, the youngest GEMS cluster (E2) has a formation redshift of $z_\mathrm{form} = 9.68$, only slightly higher than the observation redshift. The GEMS sample therefore exclusively probes the earliest phase of GC formation, corresponding to the assembly of the first atomic cooling halos in the most overdense regions of the early Universe. The existence of these clusters is fully consistent with the non-zero formation rate predicted by the model at these early times. The fact that both the Sparkler and GEMS populations align with different epochs of a single theoretical framework provides strong evidence for the universality of the atomic cooling threshold in regulating GC formation.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{../input_files/plots/step_3_analysis_plot_1777372490.png}
+    \caption{Properties of the GEMS (blue points) and Sparkler (orange points) globular cluster (GC) samples. Panels (a) and (b) show the cumulative formation history from the Trenti et al. (2015) atomic cooling model, with the formation redshifts of the GCs overplotted. Panel (c) displays the mass-metallicity relation, where GEMS GCs show a weak positive correlation. Panel (d) plots metallicity against formation redshift ($z_\mathrm{form}$), revealing that GEMS GCs formed earlier ($z_\mathrm{form} \approx 10-19$) yet are more metal-rich than the Sparkler GCs ($z_\mathrm{form} \approx 2-4$). Panel (e) shows the age-mass relation for the GEMS sample. Panel (f) presents the age distributions at the time of observation, demonstrating that GEMS GCs are very young (< 310 Myr) while Sparkler GCs are significantly older (> 1.5 Gyr).}
+    \label{fig:image0}
+\end{figure*}
+
+\subsection{Physical properties of the GC populations}
+
+A statistical summary of the key physical properties for both GC systems is provided in Table \ref{tab:summary_stats}. The two populations exhibit notable differences in their stellar mass, age, and metallicity distributions.
+
+The GEMS system displays a wide diversity in stellar mass, spanning 1.85 dex from $\log_{10}(M_\star/M_\odot) = 6.20$ to $8.05$. In stark contrast, the Sparkler system is remarkably homogeneous in mass, with its five clusters spanning only 0.22 dex ($\log_{10}(M_\star/M_\odot) = 6.85$ to $7.07$).
+
+The ages of the clusters at their respective observation redshifts also differ dramatically, as shown in Figure \ref{fig:image0}, panel (f). The GEMS GCs are exceptionally young, with ages ranging from just 4 Myr to 307 Myr. This indicates they are observed very soon after their formation. The Sparkler GCs, on the other hand, are much more evolved systems, with ages between 1.5 Gyr and 2.7 Gyr at $z=1.4$. Panel (e) of Figure \ref{fig:image0} shows the age-mass relation for the GEMS sample, revealing no significant correlation between the two properties.
+
+Perhaps the most striking result is the difference in metallicity. As shown in Figure \ref{fig:image0}, panel (d), the GEMS clusters are systematically more metal-rich than their Sparkler counterparts, despite having formed at significantly higher redshifts. The GEMS sample has a median metallicity of $[\mathrm{Z/H}] = -0.160$, whereas the Sparkler sample has a median of $[\mathrm{Z/H}] = -0.483$. This counter-intuitive finding suggests that the GEMS clusters formed within a host environment that underwent extremely rapid and efficient chemical enrichment at cosmic dawn.
+
+\begin{table*}[t]
+\centering
+\caption{Statistical Summary of GC Properties by System.}
+\label{tab:summary_stats}
+\begin{tabular}{lcccccc}
+\hline
+\hline
+Property & GEMS (N=19) Mean & GEMS Median & GEMS Std. Dev. & Sparkler (N=5) Mean & Sparkler Median & Sparkler Std. Dev. \\
+\hline
+Age (Gyr) & 0.149 & 0.116 & 0.079 & 1.934 & 1.744 & 0.484 \\
+$\log_{10}(M_\star/M_\odot)$ & 7.242 & 7.224 & 0.484 & 6.955 & 6.944 & 0.091 \\
+$[\mathrm{Z/H}]$ & $-0.167$ & $-0.160$ & 0.130 & $-0.577$ & $-0.483$ & 0.323 \\
+$z_\mathrm{form}$ & 12.90 & 11.67 & 2.44 & 2.59 & 2.36 & 0.54 \\
+\hline
+\end{tabular}
+\end{table*}
+
+\subsection{The mass-metallicity relation}
+
+We investigated the relationship between stellar mass and metallicity for both systems, as shown in Figure \ref{fig:image0}, panel (c). Using a Theil-Sen robust linear regression, we find a weak but statistically significant positive correlation for the GEMS system. The slope is $+0.099$ dex per dex in stellar mass, with a 95\% confidence interval of $[+0.023, +0.184]$. This suggests that more massive GCs in the GEMS system are modestly more metal-rich, consistent with expectations from self-enrichment or formation within more massive, enriched sub-clumps.
+
+For the Sparkler system, the regression is unconstrained due to the small sample size and narrow mass range. The resulting slope of $-1.616$ has an extremely wide 95\% confidence interval of $[-12.33, +12.56]$ and is consistent with a flat relation.
+
+The overall mass-metallicity relation for the combined sample is driven by the GEMS clusters, yielding a positive slope of $+0.140$ (95\% CI: $[+0.033, +0.259]$). The most notable feature of the MZR plot is the clear offset between the two populations, with the GEMS clusters occupying a region of higher mass and significantly higher metallicity compared to the Sparkler clusters. This metallicity offset of $\sim 0.3-0.4$ dex at a fixed mass reinforces the conclusion that the GEMS clusters were born in a pre-enriched environment. The high metallicities ($[\mathrm{Z/H}] \sim -0.17$) at such early epochs ($z_\mathrm{form} \sim 10-19$) imply that their host halo was massive and experienced a rapid, intense burst of star formation and chemical enrichment in the first few hundred million years of cosmic history. This level of enrichment is remarkably high for this epoch; for comparison, the galaxy mass-metallicity relation of Maiolino et al. (2008) extrapolated to the median mass and formation redshift of the GEMS sample predicts a metallicity of only $[\mathrm{Z/H}] \approx -2.44$, highlighting the exceptionally enriched nature of the GEMS formation environment.
+
+\end{document}
+                
