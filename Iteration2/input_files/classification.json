@@ -1,0 +1,7 @@
+{
+  "primary_category": "astro-ph.GA",
+  "secondary_categories": [
+    "astro-ph.CO"
+  ],
+  "justification": "The paper focuses on the formation and evolution of globular clusters, which is a core topic in galactic astrophysics (astro-ph.GA). It also utilizes cosmological models and halo mass functions to interpret these observations, justifying the inclusion of cosmology (astro-ph.CO)."
+}

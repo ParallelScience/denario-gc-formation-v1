@@ -1,0 +1,7 @@
+Classifier: Step 1 — Determining archive...
+  Archive: astro-ph — The paper focuses on the formation of globular clusters and dark matter halos at high redshifts, which falls squarely within the scope of astrophysics and cosmology.
+Classifier: Step 2 — Determining subcategory within 'astro-ph'...
+  Primary: astro-ph.GA
+  Secondary: astro-ph.CO
+  Justification: The paper focuses on the formation and evolution of globular clusters, which is a core topic in galactic astrophysics (astro-ph.GA). It also utilizes cosmological models and halo mass functions to interpret these observations, justifying the inclusion of cosmology (astro-ph.CO).
+Classification completed in 0 min 2 sec. Cost: $0.0000
