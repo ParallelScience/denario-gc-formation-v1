@@ -1,0 +1,69 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Hardcode all GEMS (z_obs=9.625) and Sparkler (z_obs=1.4) GC data (names/IDs, masses, ages, age errors lower/upper, metallicities) directly in the script",
+                "Initialize Planck 2018 cosmology (H0=67.4, Omega_m=0.315, Omega_Lambda=0.685) using astropy",
+                "For each GC, compute the lookback time at z_obs, subtract the cluster age to get the lookback time at formation, then solve for z_form using astropy's z_at_value with an upper bound of z=50",
+                "If the resulting lookback time at formation is negative, zero, or exceeds the age of the universe, flag that cluster with a printed warning and assign NaN to z_form, z_form_lo, z_form_hi",
+                "Propagate age errors (lower and upper) to compute z_form_lo (using age + age_err_hi) and z_form_hi (using age - age_err_lo), handling edge cases gracefully",
+                "Print a detailed table of all GC names, system labels, observed redshifts, ages, and computed z_form with uncertainties",
+                "Save the results to a CSV file with columns: system, name, z_obs, age_Gyr, log10_mass, ZH, z_form, z_form_lower_bound, z_form_upper_bound"
+            ],
+            "sub_task": "Cosmological Temporal Mapping — Compute formation redshifts for GEMS and Sparkler GCs",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement the Sheth-Tormen halo mass function using Planck 2018 cosmological parameters (H0=67.4, Omega_m=0.315, sigma8=0.811, ns=0.965)",
+                "Define the atomic cooling halo mass threshold M_min(z) corresponding to T_vir >= 10^4 K using the standard virial temperature–mass relation that accounts for mean molecular weight (mu~0.59 for ionized gas) and the redshift-dependent critical density; print M_min values at z=5, 10, 15 to verify they fall in the expected 10^7–10^8 solar mass range",
+                "Compute the comoving number density of atomic cooling halos by integrating the Sheth-Tormen mass function above M_min(z) over a redshift grid from z=2 to z=20",
+                "Multiply by the comoving volume element dV/dz to get the GC formation rate per unit redshift",
+                "Normalize the resulting curve to form a probability density function (PDF) and compute the cumulative distribution function (CDF) over the redshift range",
+                "Print the peak redshift of the theoretical PDF",
+                "Save the redshift array, normalized PDF, and CDF to a NPZ file for use in Steps 3 and 4"
+            ],
+            "sub_task": "Atomic Cooling Model Reconstruction — Compute the Trenti et al. (2015) theoretical GC formation rate PDF and CDF",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load the formation redshifts CSV from Step 1 and the theoretical PDF/CDF NPZ from Step 2",
+                "Perform a one-sample K-S test comparing the GEMS z_form median values against the theoretical Trenti et al. (2015) CDF; print the K-S statistic, p-value, and an explicit note about the limited sample size (N=19)",
+                "Perform a two-sample K-S test comparing the GEMS and Sparkler z_form distributions; print the K-S statistic, p-value, and a note about the very small Sparkler sample (N=5)",
+                "Compute the Spearman rank correlation between [Z/H] and z_form for the combined GEMS+Sparkler sample and separately for each system; print rho and p-value for each",
+                "Compute the statistical summary table: mean, median, and standard deviation of age_Gyr, log10_mass, ZH, and z_form for GEMS, Sparkler, and the combined sample; print the table in a well-formatted manner",
+                "Save all statistical results (K-S stats, p-values, Spearman results) to a CSV file and the summary table to a separate CSV file"
+            ],
+            "sub_task": "Statistical tests, Spearman correlation, and statistical summary table",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all computed data from Steps 1, 2, and 3",
+                "Figure 1 (formation redshift comparison, 2-panel): Top panel shows the theoretical Trenti et al. (2015) GC formation rate PDF vs. redshift as a filled curve, with GEMS z_form values shown as vertical tick marks or scatter points with horizontal error bars, and Sparkler z_form values similarly marked in a different color; bottom panel shows the theoretical CDF with the empirical CDFs of GEMS and Sparkler z_form overplotted",
+                "Figure 2 (three-panel combined): Panel A: scatter plot of [Z/H] vs. log10(M/Msolar) for GEMS and Sparkler with metallicity error bars, plus a reference GC MZR line following Harris et al. (approximately [Z/H] = 0.4 * log10(M/Msolar) - 3.0); Panel B: scatter plot of [Z/H] vs. z_form for the combined sample with error bars, color-coded by system; Panel C: overlapping KDE or histogram of log10(M/Msolar) for GEMS and Sparkler, annotated with the two-sample K-S test result",
+                "Save Figure 1 and Figure 2 as separate high-resolution PNG files"
+            ],
+            "sub_task": "Generate all analysis plots — two multi-panel figure files",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Write a comprehensive Results section covering all analysis steps",
+                "Report the formation redshift mapping: describe the z_form values for GEMS GCs (range, mean, median, consistency with z_obs~9.6) and Sparkler GCs (range, mean, median, implied ancient formation epochs)",
+                "Report the atomic cooling model reconstruction: describe the theoretical PDF shape, the numerical peak redshift printed in Step 2, and the width of the distribution; quantitatively compare the peak redshift to the mean and median z_form of the GEMS sample and state the offset in redshift units",
+                "Report the K-S test results with exact statistics from Step 3, including the explicit caveats about sample size limitations",
+                "Report the Spearman rank correlation results (rho and p-value) for the combined sample and each system separately, and interpret the sign and magnitude physically",
+                "Report the mass-metallicity relation findings: describe the locus of both systems relative to the Harris et al. GC MZR reference line, and discuss any offset",
+                "Explicitly address the \"metallicity paradox\": discuss whether the near-solar or mildly sub-solar metallicities of some GEMS clusters (e.g., B2 with [Z/H]=+0.04) are consistent with formation in atomic cooling halos at z~10, or whether they suggest pre-enrichment or rapid in-situ enrichment",
+                "Report the mass distribution comparison: describe the two-sample K-S test result and discuss selection effects and dynamical evolution as explanations for the mass distribution differences",
+                "Report the statistical summary table values (mean, median, std for each system) from Step 3",
+                "Discuss consistency and tension with LCDM predictions, addressing all four key questions from the problem statement",
+                "Reference all generated plots by their descriptive names (Figure 1: formation redshift comparison; Figure 2: combined mass-metallicity, z_form-metallicity, and mass distribution panels)"
+            ],
+            "sub_task": "Write the full Results section of the paper",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
